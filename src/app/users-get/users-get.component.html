@@ -1,0 +1,40 @@
+<table class="table table-dark table-striped">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>User Name</th>
+    <th>E-Mail</th>
+    <th>Phone</th>
+    <th>Website</th>
+    <th>Address</th>
+    <th>Company Details</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let user of users">
+    <td>{{user.id}}</td>
+    <td>{{user.name}}</td>
+    <td>{{user.username}}</td>
+    <td><a href="mailTo:{{user.email}}">{{user.email}}</a></td>
+    <td>{{user.phone}}</td>
+    <td>{{user.website}}</td>
+    <td>
+      {{user.address.street}}<br/>
+      {{user.address.suite}}<br/>
+      {{user.address.city}}<br/>
+      {{user.address.zipcode}}
+    </td>
+    <td>
+      {{user.company.name}}<br/>
+      {{user.company.catchPhrase}}<br/>
+      {{user.company.bs}}<br/>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+
+
+
+

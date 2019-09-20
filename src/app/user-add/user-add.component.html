@@ -1,0 +1,71 @@
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]="userAddForm" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <div class="form-group col">
+          <label>Title</label>
+          <select formControlName="title" class="form-control" [ngClass]="{ 'is-invalid': submitted && addUserForm.title.errors}">
+            <option value=""></option>
+            <option value="Mr">Mr</option>
+            <option value="Mrs">Mrs</option>
+            <option value="Miss">Miss</option>
+            <option value="Ms">Ms</option>
+          </select>
+          <div *ngIf="submitted && addUserForm.title.errors" class="invalid-feedback">
+            <div *ngIf="addUserForm.title.errors.required">Title is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>First Name</label>
+          <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && addUserForm.firstName.errors }"/>
+          <div *ngIf="submitted && addUserForm.firstName.errors" class="invalid-feedback">
+            <div *ngIf="addUserForm.firstName.errors.required">First Name is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>Last Name</label>
+          <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && addUserForm.lastName.errors }"/>
+          <div *ngIf="submitted && addUserForm.lastName.errors" class="invalid-feedback">
+            <div *ngIf="addUserForm.lastName.errors.required">Last Name is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="text" formControlName="email" email class="form-control" [ngClass]="{ 'is-invalid': submitted && addUserForm.email.errors }" />
+        <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+        <div *ngIf="submitted && addUserForm.email.errors" class="invalid-feedback">
+          <div *ngIf="addUserForm.email.errors.required">Email is required</div>
+          <div *ngIf="addUserForm.email.errors.email">Email must be a valid email address</div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col">
+          <label>Password</label>
+          <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && addUserForm.password.errors }" />
+          <div *ngIf="submitted && addUserForm.password.errors" class="invalid-feedback">
+            <div *ngIf="addUserForm.password.errors.required">Password is required</div>
+            <div *ngIf="addUserForm.password.errors.minlength">Password must be at least 6 characters</div>
+          </div>
+        </div>
+        <div class="form-group col">
+          <label>Confirm Password</label>
+          <input type="password" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && addUserForm.confirmPassword.errors }" />
+          <div *ngIf="submitted && addUserForm.confirmPassword.errors" class="invalid-feedback">
+            <div *ngIf="addUserForm.confirmPassword.errors.required">Confirm Password is required</div>
+            <div *ngIf="addUserForm.confirmPassword.errors.mustMatch">Passwords must match</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group form-check">
+        <input type="checkbox" formControlName="acceptTerms" id="acceptTerms" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && addUserForm.acceptTerms.errors }" />
+        <label for="acceptTerms" class="form-check-label">Accept Terms & Conditions</label>
+        <div *ngIf="submitted && addUserForm.acceptTerms.errors" class="invalid-feedback">Accept Ts & Cs is required</div>
+      </div>
+      <div class="text-center">
+        <button class="btn btn-primary mr-1">Register</button>
+        <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
