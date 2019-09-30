@@ -2,11 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 @Component({
-  selector: 'app-product-get',
+  selector: 'users-get',
   templateUrl: './users-get.component.html',
   styleUrls: ['./users-get.component.css']
 })
 export class UsersGetComponent implements OnInit {
+
+  url = "https://jsonplaceholder.typicode.com/users";
 
   private users = [];
   clicked: boolean;
@@ -16,7 +18,7 @@ export class UsersGetComponent implements OnInit {
 
   ngOnInit() {
     this.httpClient.request('GET',
-      `https://jsonplaceholder.typicode.com/users`,
+      this.url,
       {responseType: 'json'})
       .subscribe((res: any[]) => {
         this.clicked = true;
