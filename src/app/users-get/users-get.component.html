@@ -1,36 +1,24 @@
 <table class="table table-dark table-striped">
   <thead>
   <tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>User Name</th>
-    <th>E-Mail</th>
+    <th>Full Name</th>
+    <th>Description</th>
     <th>Phone</th>
     <th>Website</th>
-    <th>Address</th>
-    <th>Company Details</th>
+    <th>Spoken Languages</th>
+    <th>Average Rating</th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let user of users">
-    <td>{{user.id}}</td>
-    <td>{{user.name}}</td>
-    <td>{{user.username}}</td>
-    <td><a href="mailTo:{{user.email}}">{{user.email}}</a></td>
-    <td>{{user.phone}}</td>
-    <td>{{user.website}}</td>
-    <td>
-      {{user.address.street}}<br/>
-      {{user.address.suite}}<br/>
-      {{user.address.city}}<br/>
-      {{user.address.zipcode}}
-    </td>
-    <td>
-      {{user.company.name}}<br/>
-      {{user.company.catchPhrase}}<br/>
-      {{user.company.bs}}<br/>
-    </td>
+  <tr *ngFor="let user of users | paginate: { itemsPerPage: 5, currentPage: page }">
+    <td>{{user["FIRST_NAME"]}}, {{user["LAST_NAME"]}} {{user["MIDDLE_NAME"]}}</td>
+    <td>{{user["DESCRIPTION"]}}</td>
+    <td>{{user["CELLPHONE"]}}</td>
+    <td><a href="{{user['WEBSITE']}}">{{user["WEBSITE"]}}</a></td>
+    <td>{{user["LANGUAGES"]}}</td>
+    <td>{{user["AVG_USER_RATING"]}}</td>
   </tr>
+  <tr><pagination-controls (pageChange)="page = $event"></pagination-controls></tr>
   </tbody>
 </table>
 

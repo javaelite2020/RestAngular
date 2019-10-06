@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Component({
   selector: 'users-get',
@@ -8,22 +8,30 @@ import {HttpClient} from '@angular/common/http';
 })
 export class UsersGetComponent implements OnInit {
 
-  url = "https://jsonplaceholder.typicode.com/users";
+  //url = 'https://jsonplaceholder.typicode.com/users';
+  url = 'http://localhost:8082/lawyer-catalog-service/lawyers';
 
-  private users = [];
-  clicked: boolean;
+  private users: any[] = [];
+  private metadata: any[] = [];
+  status: any;
+  page: any;
 
   constructor(private httpClient: HttpClient) {
   }
 
   ngOnInit() {
-    this.httpClient.request('GET',
-      this.url,
-      {responseType: 'json'})
-      .subscribe((res: any[]) => {
-        this.clicked = true;
-        this.users = res;
-      });
+    let headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json');
+    let options = {headers: headers, crossDomain: true};
+
+    this.httpClient.get(this.url, options).subscribe(response => {
+      this.metadata = response['metadata'];
+      this.status = this.metadata['status'];
+      if (this.status == 'Success') {
+        this.page = 1;
+        this.users = response['data'];
+      }
+    });
   }
 
   ngAfterViewInit() {
