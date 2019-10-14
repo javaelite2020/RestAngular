@@ -3,6 +3,9 @@ import {NgModule} from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
+import {MatTableModule} from '@angular/material/table';
+import {MatButtonModule, MatIconModule, MatPaginatorModule, MatToolbarModule, MatTooltipModule} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {AppComponent} from './app.component';
 import {UserAddComponent} from './user-add/user-add.component';
@@ -11,7 +14,7 @@ import {LoginComponent} from './login/login.component';
 import {HomeComponent} from './home/home.component';
 
 import {CarouselModule} from 'ngx-bootstrap';
-import { NgxPaginationModule } from 'ngx-pagination';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 import {LoginService} from './Services/login.service';
 import {ProductsService} from './Services/products.service';
@@ -54,7 +57,14 @@ const routes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     CarouselModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatTableModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatPaginatorModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTooltipModule
   ],
   exports: [RouterModule],
   providers: [ProductsService, LoginService],
