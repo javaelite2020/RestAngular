@@ -1,27 +1,51 @@
-<table class="table table-dark table-striped">
-  <thead>
-  <tr>
-    <th>Full Name</th>
-    <th>Description</th>
-    <th>Phone</th>
-    <th>Website</th>
-    <th>Spoken Languages</th>
-    <th>Average Rating</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let user of users | paginate: { itemsPerPage: 5, currentPage: page }">
-    <td>{{user["FIRST_NAME"]}}, {{user["LAST_NAME"]}} {{user["MIDDLE_NAME"]}}</td>
-    <td>{{user["DESCRIPTION"]}}</td>
-    <td>{{user["CELLPHONE"]}}</td>
-    <td><a href="{{user['WEBSITE']}}">{{user["WEBSITE"]}}</a></td>
-    <td>{{user["LANGUAGES"]}}</td>
-    <td>{{user["AVG_USER_RATING"]}}</td>
-  </tr>
-  <tr><pagination-controls (pageChange)="page = $event"></pagination-controls></tr>
-  </tbody>
-</table>
+<mat-toolbar>
+  <span>Lawyers List</span>
+</mat-toolbar>
 
+<mat-table [dataSource]="dataSource" class="mat-elevation-z1">
+  <ng-container matColumnDef="fullName">
+    <mat-header-cell *matHeaderCellDef> Full Name</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.fullName}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef> Description</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.description}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="longDescription">
+    <mat-header-cell *matHeaderCellDef> Long Description</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.longDescription}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="cellPhone">
+    <mat-header-cell *matHeaderCellDef> Cell Phone</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.cellPhone}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="avgLawyerRating">
+    <mat-header-cell *matHeaderCellDef> Average Lawyer Rating</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.avgLawyerRating}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="website">
+    <mat-header-cell *matHeaderCellDef> Website</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.website}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="languages">
+    <mat-header-cell *matHeaderCellDef> Languages</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.languages}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef> Actions</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <button mat-icon-button matTooltip="Click to Edit" class="iconbutton" color="primary">
+        <mat-icon aria-label="Edit">edit</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="Click to Delete" class="iconbutton" color="warn">
+        <mat-icon aria-label="Delete">delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+<mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 
 
 
