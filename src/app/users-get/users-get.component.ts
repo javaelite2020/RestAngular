@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {MatPaginator, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatPaginator, MatTableDataSource} from '@angular/material';
+import {EditDialogComponent} from '../dialogs/edit/edit.dialog.component';
 
 @Component({
   selector: 'users-get',
@@ -14,13 +15,14 @@ export class UsersGetComponent implements OnInit {
   url = 'http://localhost:8082/lawyer-catalog-service/lawyers';
 
   private dataSource = new MatTableDataSource<Lawyer>();
-  private displayedColumns: string[] = ['fullName', 'description', 'cellPhone', 'website', 'languages', 'avgLawyerRating','actions'];
+  private displayedColumns: string[] = ['lawyerCode','fullName', 'description', 'cellPhone', 'website', 'languages', 'avgLawyerRating', 'actions'];
   private metadata: Object[] = [];
   private status = '';
+  private shown = false;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -35,6 +37,7 @@ export class UsersGetComponent implements OnInit {
         let tempArray: any[] = [];
         response['data'].forEach(function(item) {
           tempArray.push({
+            lawyerCode: item.lawyer_code,
             fullName: item.FIRST_NAME + ', ' + item.LAST_NAME,
             description: item.DESCRIPTION,
             cellPhone: item.CELLPHONE,
@@ -51,9 +54,21 @@ export class UsersGetComponent implements OnInit {
 
   ngAfterViewInit() {
   }
+
+  startEdit(lawyerCode: string,
+            description: string,
+            cellPhone: string,
+            website: any) {
+    const dialogRef = this.dialog.open(EditDialogComponent, {
+      data: {lawyerCode: lawyerCode, description: description, cellPhone: cellPhone, website: website},
+      disableClose: true,
+      autoFocus: true
+    });
+  }
 }
 
 export class Lawyer {
+  lawyer_code: string
   fullName: string;
   description: string;
   cellPhone: string;

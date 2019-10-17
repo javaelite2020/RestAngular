@@ -1,40 +1,41 @@
-<mat-toolbar>
+<mat-toolbar color="primary">
   <span>Lawyers List</span>
 </mat-toolbar>
 
-<mat-table [dataSource]="dataSource" class="mat-elevation-z1">
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="lawyerCode" (show)="shown">
+    <mat-header-cell *matHeaderCellDef> Lawyer Code</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.lawyerCode}} </mat-cell>
+  </ng-container>
   <ng-container matColumnDef="fullName">
     <mat-header-cell *matHeaderCellDef> Full Name</mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.fullName}}</mat-cell>
+    <mat-cell *matCellDef="let element"> {{element.fullName}} </mat-cell>
   </ng-container>
   <ng-container matColumnDef="description">
     <mat-header-cell *matHeaderCellDef> Description</mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.description}}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="longDescription">
-    <mat-header-cell *matHeaderCellDef> Long Description</mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.longDescription}}</mat-cell>
+    <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
   </ng-container>
   <ng-container matColumnDef="cellPhone">
     <mat-header-cell *matHeaderCellDef> Cell Phone</mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.cellPhone}}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="avgLawyerRating">
-    <mat-header-cell *matHeaderCellDef> Average Lawyer Rating</mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.avgLawyerRating}}</mat-cell>
+    <mat-cell *matCellDef="let element"> {{element.cellPhone}} </mat-cell>
   </ng-container>
   <ng-container matColumnDef="website">
     <mat-header-cell *matHeaderCellDef> Website</mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.website}}</mat-cell>
+    <mat-cell *matCellDef="let element"><a href="http://{{element.website}}">{{element.website}}</a></mat-cell>
   </ng-container>
   <ng-container matColumnDef="languages">
     <mat-header-cell *matHeaderCellDef> Languages</mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.languages}}</mat-cell>
+    <mat-cell *matCellDef="let element"> {{element.languages}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="avgLawyerRating">
+    <mat-header-cell *matHeaderCellDef> Avg. Lawyer Rating</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.avgLawyerRating}} </mat-cell>
   </ng-container>
   <ng-container matColumnDef="actions">
     <mat-header-cell *matHeaderCellDef> Actions</mat-header-cell>
-    <mat-cell *matCellDef="let element">
-      <button mat-icon-button matTooltip="Click to Edit" class="iconbutton" color="primary">
+    <mat-cell *matCellDef="let row; let i=index;">
+      <button (click)="startEdit(row.lawyerCode, row.description, row.cellPhone, row.website)" mat-icon-button
+              matTooltip="Click to Edit" class="iconbutton" color="primary">
         <mat-icon aria-label="Edit">edit</mat-icon>
       </button>
       <button mat-icon-button matTooltip="Click to Delete" class="iconbutton" color="warn">
@@ -46,6 +47,9 @@
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>
 <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+
+
 
 
 

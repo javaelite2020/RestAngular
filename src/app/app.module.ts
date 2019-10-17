@@ -1,10 +1,17 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
-import {MatButtonModule, MatIconModule, MatPaginatorModule, MatToolbarModule, MatTooltipModule} from '@angular/material';
+import {
+  MatButtonModule, MatDialogModule,
+  MatFormFieldModule,
+  MatIconModule, MatInputModule,
+  MatPaginatorModule,
+  MatToolbarModule,
+  MatTooltipModule
+} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {AppComponent} from './app.component';
@@ -18,6 +25,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
 
 import {LoginService} from './Services/login.service';
 import {ProductsService} from './Services/products.service';
+import {EditDialogComponent} from './dialogs/edit/edit.dialog.component';
+import {UsersEditService} from './Services/users-edit.service';
 
 const routes: Routes = [
   {
@@ -37,6 +46,10 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
+    path: 'user/edit',
+    component: UsersEditService
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
@@ -49,7 +62,11 @@ const routes: Routes = [
     UserAddComponent,
     UsersGetComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    EditDialogComponent
+  ],
+  entryComponents: [
+    EditDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +81,11 @@ const routes: Routes = [
     MatPaginatorModule,
     MatIconModule,
     MatButtonModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatDialogModule
   ],
   exports: [RouterModule],
   providers: [ProductsService, LoginService],
