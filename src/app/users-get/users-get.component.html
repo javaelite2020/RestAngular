@@ -2,53 +2,59 @@
   <span>Lawyers List</span>
 </mat-toolbar>
 
-<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  <ng-container matColumnDef="lawyerCode" (show)="shown">
-    <mat-header-cell *matHeaderCellDef> Lawyer Code</mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.lawyerCode}} </mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="fullName">
-    <mat-header-cell *matHeaderCellDef> Full Name</mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.fullName}} </mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="description">
-    <mat-header-cell *matHeaderCellDef> Description</mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="cellPhone">
-    <mat-header-cell *matHeaderCellDef> Cell Phone</mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.cellPhone}} </mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="website">
-    <mat-header-cell *matHeaderCellDef> Website</mat-header-cell>
-    <mat-cell *matCellDef="let element"><a href="http://{{element.website}}">{{element.website}}</a></mat-cell>
-  </ng-container>
+<div id="lawyer" class="container">
+  <div class="clear height10"></div>
+  <h4>The following immigration lawyers are willing to answer your questions related to U.S. immigration.</h4>
 
-  <ng-container matColumnDef="languages">
-    <mat-header-cell *matHeaderCellDef> Languages</mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.languages}} </mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="avgLawyerRating">
-    <mat-header-cell *matHeaderCellDef> Avg. Lawyer Rating</mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.avgLawyerRating}} </mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="actions">
-    <mat-header-cell *matHeaderCellDef> Actions</mat-header-cell>
-    <mat-cell *matCellDef="let row; let i=index;">
-      <button (click)="startEdit(row.lawyerCode, row.description, row.cellPhone, row.website)" mat-icon-button
-              matTooltip="Click to Edit" class="iconbutton" color="primary">
-        <mat-icon aria-label="Edit">edit</mat-icon>
-      </button>
-      <button mat-icon-button matTooltip="Click to Delete" class="iconbutton" color="warn">
-        <mat-icon aria-label="Delete">delete</mat-icon>
-      </button>
-    </mat-cell>
-  </ng-container>
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-</mat-table>
-<mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-
+  <div style="text-align: center">
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+  </div>
+  <div *ngFor="let lawyer of users | paginate: { itemsPerPage: 5, currentPage: page }"
+       class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lawyer_box">
+    <div class="profile_img_con">
+      <a onclick="www.google.com" href="#">
+        <div class="profile_img">
+          <img src="./assets/images/horse.jpg" width="200" height="200" alt="Andrew M. Wilson"/>
+        </div>
+      </a>
+    </div>
+    <div class="lawyer_sec1">
+      <h2><a onclick="www.google.com" href="https://www.google.com">{{lawyer.FIRST_NAME}}, {{lawyer.LAST_NAME}}</a></h2>
+      <div class="position">{{lawyer.DESCRIPTION}} (100%)</div>
+      {{lawyer.FIRST_NAME}} {{lawyer.LAST_NAME}}<br>
+      3633 Longfellow Road<br>
+      Tallahassee, FL, 32311<br>
+      (937) 380-8706
+    </div>
+    <div class="lawyer_sec1">
+      <div>Law Firm: <font>{{lawyer.LAWFIRM_NAME}}</font></div>
+      <div>Established: <font>1965</font></div>
+      <div>Practice Areas: <font>{{lawyer.LONG_DESCRIPTION}} (100%)</font></div>
+      <div>Languages: <font>{{lawyer.LANGUAGES}}</font></div>
+      <div>Website: <font><a href="http://{{lawyer.WEBSITE}}" rel="nofollow" target="_blank">{{lawyer.WEBSITE}}</a></font>
+      </div>
+    </div>
+    <div class="lawyer_sec1 padrt0">
+      <div class="clear height20"></div>
+      <a class="wordwrap " href="https://www.google.com">
+        <aside><img src="./assets/images/ask_lawyer_icon.png" width="17" height="17" alt="">
+          Ask {{lawyer.FIRST_NAME}} {{lawyer.LAST_NAME}} a question
+        </aside>
+      </a>
+      <div class="clear height20"></div>
+      <div class="clear height20"></div>
+      <a class="wordwrap " href="https://www.google.com">
+        <aside><img src="./assets/images/visit_lawyer_icon.png" width="17" height="17" alt="">
+          Visit {{lawyer.FIRST_NAME}} {{lawyer.LAST_NAME}}’s forum
+        </aside>
+      </a>
+    </div>
+  </div>
+  <div class="clear height20"></div>
+  <div style="text-align: center">
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+  </div>
+</div>
 
 
 

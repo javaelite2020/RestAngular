@@ -10,15 +10,17 @@ import {EditDialogComponent} from '../dialogs/edit/edit.dialog.component';
 })
 
 export class UsersGetComponent implements OnInit {
-
-  //url = 'https://jsonplaceholder.typicode.com/users';
-  url = 'http://localhost:8082/lawyer-catalog-service/lawyers';
-
+  url = 'http://localhost:8082/lawyer-catalog-service/api/lawyers?api_key=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJKVXNlciJ9.Ai6lv3qSwo9RnVHKmbn2Ycdt4IO8Cif1m2xnKujJsjchFjKyQn_KHZ5qvhwwr3m9RWx8lJcLsL7Jt89VS-BiqA';
   private dataSource = new MatTableDataSource<Lawyer>();
-  private displayedColumns: string[] = ['lawyerCode','fullName', 'description', 'cellPhone', 'website', 'languages', 'avgLawyerRating', 'actions'];
-  private metadata: Object[] = [];
+  private displayedColumns: string[] = ['lawyerCode', 'fullName', 'description', 'cellPhone', 'website', 'languages', 'avgLawyerRating', 'actions'];
+  //private metadata: Object[] = [];
+
+  private users: any[] = [];
+  private metadata: any[] = [];
+
   private status = '';
   private shown = false;
+  page: any;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -29,7 +31,7 @@ export class UsersGetComponent implements OnInit {
     let headers = new HttpHeaders();
     headers.set('Content-Type', 'application/json');
     let options = {headers: headers, crossDomain: true};
-    this.dataSource.paginator = this.paginator;
+    /*this.dataSource.paginator = this.paginator;
     this.httpClient.get(this.url, options).subscribe(response => {
       this.metadata = response['metadata'];
       this.status = this.metadata['status'];
@@ -49,7 +51,17 @@ export class UsersGetComponent implements OnInit {
         this.dataSource = new MatTableDataSource<Lawyer>(tempArray);
         this.dataSource.paginator = this.paginator;
       }
+    });*/
+
+    this.httpClient.get(this.url, options).subscribe(response => {
+      this.metadata = response['metadata'];
+      this.status = this.metadata['status'];
+      if (this.status == 'Success') {
+        this.page = 1;
+        this.users = response['data'];
+      }
     });
+
   }
 
   ngAfterViewInit() {
@@ -68,7 +80,7 @@ export class UsersGetComponent implements OnInit {
 }
 
 export class Lawyer {
-  lawyer_code: string
+  lawyer_code: string;
   fullName: string;
   description: string;
   cellPhone: string;

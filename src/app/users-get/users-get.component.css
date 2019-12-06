@@ -1,0 +1,99 @@
+#lawyer .lawyer_box {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 25px;
+  display: flex;
+  background: #fff;
+  margin-top: 33px
+}
+
+#lawyer .lawyer_box:hover {
+  background: #ecf2f8
+}
+
+#lawyer .lawyer_sec1 {
+  font-family: open_sansregular;
+  font-size: 14px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-right: 1px solid #ccc;
+  display: inline-block;
+  max-width: 360px
+}
+
+#lawyer .lawyer_sec1:nth-child(2) {
+  padding-left: 0;
+  padding-top: 10px;
+  float: left
+}
+
+.height20{height:20px}
+.height10{height:10px}
+
+#lawyer .lawyer_sec1:nth-child(3) {
+  padding-top: 10px
+}
+
+#lawyer .lawyer_sec1:nth-child(3) div {
+  margin-bottom: 5px
+}
+
+#lawyer .lawyer_sec1 h2 {
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0
+}
+
+#lawyer .position {
+  font-size: 14px;
+  font-weight: 400;
+  margin: 5px 0 10px
+}
+
+#lawyer .profile_img {
+  width: 135px;
+  height: 135px;
+  overflow: hidden !important;
+  border-radius: 50%;
+  margin: 8.5px;
+  float: left
+}
+
+#lawyer .profile_img_con {
+  border: 1px solid #acacac;
+  background: #fff;
+  border-radius: 50%;
+  width: 154px;
+  height: 154px;
+  display: inline-block;
+  margin-right: 20px
+}
+
+#lawyer .lawyer_sec1 a.lst_link {
+  display: block;
+  width: 100%;
+  margin-top: 20px
+}
+
+#lawyer .lawyer_sec1 a.lst_link aside {
+  display: inline-block;
+  width: 80%
+}
+
+#lawyer .lawyer_sec1 a.lst_link img {
+  margin-right: 10px;
+  display: inline-block;
+  float: left
+}
+
+#lawyer .lawyer_sec1:last-child {
+  border-right: none
+}
+
+#lawyer a.see_more {
+  display: block;
+  font-size: 18px;
+  margin: 25px auto 30px;
+  text-align: center
+}
+
